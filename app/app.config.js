@@ -19,7 +19,7 @@
   function jwtConfig($httpProvider, jwtInterceptorProvider) {
     jwtInterceptorProvider.tokenGetter = function() {
       return localStorage.getItem('id_token');
-    }
+    };
 
     $httpProvider.interceptors.push('jwtInterceptor');
   }

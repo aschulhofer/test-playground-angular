@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('app.authentication').
-  factory('authenticationservice', authenticationservice)
+  factory('authenticationservice', authenticationserviceFactory)
 
-  authenticationservice.$inject = ['$http'];
+  authenticationserviceFactory.$inject = ['$http', 'authConfig'];
 
-  function authenticationservice($http) {
+  function authenticationserviceFactory($http, authConfig) {
     return {
       login: login,
       logout: logout,
@@ -20,10 +20,10 @@
       var requestData = {
         username: username,
         password: password
-      }
+      };
 
       $http({
-        url: 'http://localhost:28080/resteasy-backend/api/auth/login',
+        url: authConfig.loginUrl,
         method: 'POST',
         data: requestData,
         // This request will NOT send the token as it has skipAuthentication
@@ -49,7 +49,7 @@
       console.log('TEST auth service method call');
 
       $http({
-        url: 'http://localhost:28080/resteasy-backend/api/auth/test',
+        url: authConfig.testUrl,
         method: 'POST'
       })
       .then(function scb(response) {
