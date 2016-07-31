@@ -10,7 +10,14 @@
 
     $routeProvider.
       when('/login', {
-        templateUrl: 'layout/login.html',
+        templateUrl: 'layout/login/login.view.html',
+        controller: 'LoginViewController',
+        controllerAs: 'vm'
+      })
+      .when('/overview', {
+        templateUrl: 'layout/overview/overview.view.html',
+        controller: 'OverviewViewController',
+        controllerAs: 'vm'
       });
 
     $routeProvider.otherwise({redirectTo: '/login'});
