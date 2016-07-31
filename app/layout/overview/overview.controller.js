@@ -4,7 +4,7 @@
   angular.module('app.view.overview')
   .controller('OverviewViewController', OverviewViewController);
 
-  LoginViewController.$inject = ['$scope', '$location'];
+  OverviewViewController.$inject = ['$scope', '$location'];
 
   function OverviewViewController($scope, $location) {
     var vm = this;
