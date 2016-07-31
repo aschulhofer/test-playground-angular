@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.authentication').
-  factory('authenticationservice', authenticationserviceFactory)
+  factory('authenticationservice', authenticationserviceFactory);
 
   authenticationserviceFactory.$inject = ['$http', 'authConfig'];
 
@@ -30,14 +30,14 @@
         skipAuthorization: true
       })
       .then(function scb(response) {
-        console.log("success", response, response.data)
+        console.log("success", response, response.data);
 
         var data = response.data;
 
         localStorage.setItem("id_token", data.jwt);
       },
       function ecb(response) {
-        console.error("failed", response)
+        console.error("failed", response);
       });
     }
 
@@ -53,10 +53,10 @@
         method: 'POST'
       })
       .then(function scb(response) {
-        console.log("success", response, response.data)
+        console.log("success", response, response.data);
       },
       function ecb(response) {
-        console.error("failed", response)
+        console.error("failed", response);
       });
     }
   }
