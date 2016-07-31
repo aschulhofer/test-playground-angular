@@ -20,8 +20,12 @@
       $scope.$on('LoginEvent', onLoginEvent);
     }
 
-    function onLoginEvent() {
+    function onLoginEvent(event, payload) {
       console.log("Login Event:", arguments);
+
+      if(payload.success) {
+        $location.path('/overview');
+      }
     }
   }
 
