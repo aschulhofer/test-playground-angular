@@ -4,9 +4,9 @@
   angular.module('app.authentication').
   factory('authenticationservice', authenticationserviceFactory);
 
-  authenticationserviceFactory.$inject = ['$http', 'authConfig'];
+  authenticationserviceFactory.$inject = ['$q', '$http', 'authConfig'];
 
-  function authenticationserviceFactory($http, authConfig) {
+  function authenticationserviceFactory($q, $http, authConfig) {
     return {
       login: login,
       logout: logout,
@@ -22,7 +22,7 @@
         password: password
       };
 
-      $http({
+      return $http({
         url: authConfig.loginUrl,
         method: 'POST',
         data: requestData,
@@ -35,9 +35,13 @@
         var data = response.data;
 
         localStorage.setItem("id_token", data.jwt);
-      },
-      function ecb(response) {
+
+        return true;
+      })
+      .catch(function ecb(response) {
         console.error("failed", response);
+
+        return $q.reject('Failed to login');
       });
     }
 
@@ -46,6 +50,7 @@
     }
 
     function doTest() {
+      var defer = $q.defer();
       console.log('TEST auth service method call');
 
       $http({
@@ -54,10 +59,16 @@
       })
       .then(function scb(response) {
         console.log("success", response, response.data);
-      },
-      function ecb(response) {
+
+        defer.resolve(true);
+      })
+      .catch(function ecb(response) {
         console.error("failed", response);
+
+        defer.reject('Failed to login, status: ' + response.status);
       });
+
+      return defer.promise;
     }
   }
 })();
