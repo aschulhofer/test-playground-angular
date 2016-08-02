@@ -24,7 +24,7 @@
   "scripts": {
     "lint": "jshint .",
     "clean": "rimraf app/dist",
-    "create:dist": "node scripts/mkdist.js && echo '' > app/dist/bundle.js && echo '' > app/dist/bundle.css",
+    "create:dist": "node scripts/mkdist.js",
     "preconcat": "npm run clean && npm run create:dist",
     "concat": "node scripts/glob-concat.js",
     "watch:js": "watch \"npm run concat\" app --wait=2 --ignoreDirectoryPattern=\"/(.*)(bower_components|dist)(.*)/g\"",
@@ -41,6 +41,7 @@
     "update-index-async": "node -e \"var fs=require('fs'),indexFile='app/index-async.html',loaderFile='app/bower_components/angular-loader/angular-loader.min.js',loaderText=fs.readFileSync(loaderFile,'utf-8').split(/sourceMappingURL=angular-loader.min.js.map/).join('sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map'),indexText=fs.readFileSync(indexFile,'utf-8').split(/\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/).join('//@@NG_LOADER_START@@\\n'+loaderText+'    //@@NG_LOADER_END@@');fs.writeFileSync(indexFile,indexText);\""
   },
   "dependencies": {
-    "angular-jwt": "0.0.9"
+    "angular-jwt": "0.0.9",
+    "load-json-file": "^2.0.0"
   }
 }
