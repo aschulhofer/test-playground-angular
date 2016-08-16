@@ -37,10 +37,15 @@ module.exports = function(grunt) {
 
   });
 
+  // Load plugin tasks
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  // Custom tasks
   grunt.registerTask('dist', ['clean:dist', 'concat:js', 'concat:css']);
   grunt.registerTask('run', ['dist', 'watch']);
+
+  // Default task run with "grunt"
+  grunt.registerTask('default', ['run']);
 };
