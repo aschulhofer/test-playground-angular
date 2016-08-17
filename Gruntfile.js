@@ -26,12 +26,32 @@ module.exports = function(grunt) {
         debounceDelay: 1500
       },
       js: {
-        files: ['!app/dist/*', 'app/**/*.js'],
+        files: ['app/**/*.js', '!app/dist/**/*'],
         tasks: ['concat:js']
       },
       css: {
-        files: ['!app/dist/*', 'app/**/*.css'],
+        files: ['app/**/*.css', '!app/dist/**/*'],
         tasks: ['concat:css']
+      },
+      livereload: {
+        options: {
+            livereload: true
+        },
+        files: ['app/dist/**/*']
+      }
+    },
+
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          protocol: 'http',
+          hostname: '127.0.0.1',
+          base: 'app',
+          open: true,
+          keepalive: true,
+          livereload: true
+        }
       }
     }
 
@@ -40,6 +60,7 @@ module.exports = function(grunt) {
   // Load plugin tasks
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Custom tasks
