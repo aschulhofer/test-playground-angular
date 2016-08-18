@@ -6,7 +6,7 @@
       "bower_components/angular-route/angular-route.js",
       "bower_components/angular-jwt/dist/angular-jwt.js",
       "app/app.module.js",
-      "app/configuration/env.js",
+      "app/configuration/**/*.js",
       "app/app.config.js",
       "app/{components,directives,layout,services,main,controller}/**/*module.js",
       "app/{components,directives,layout,services,main,controller}/**/!(*.module).js"
