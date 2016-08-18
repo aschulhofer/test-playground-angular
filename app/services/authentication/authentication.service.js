@@ -4,9 +4,9 @@
   angular.module('app.authentication').
   factory('authenticationservice', authenticationserviceFactory);
 
-  authenticationserviceFactory.$inject = ['$q', '$http', 'authConfig'];
+  authenticationserviceFactory.$inject = ['$q', '$http', 'AUTHENTICATION_CONFIG'];
 
-  function authenticationserviceFactory($q, $http, authConfig) {
+  function authenticationserviceFactory($q, $http, AUTHENTICATION_CONFIG) {
     return {
       login: login,
       logout: logout,
@@ -23,7 +23,7 @@
       };
 
       return $http({
-        url: authConfig.loginUrl,
+        url: AUTHENTICATION_CONFIG.loginUrl,
         method: 'POST',
         data: requestData,
         // This request will NOT send the token as it has skipAuthentication
@@ -54,7 +54,7 @@
       console.log('TEST auth service method call');
 
       $http({
-        url: authConfig.testUrl,
+        url: AUTHENTICATION_CONFIG.testUrl,
         method: 'POST'
       })
       .then(function scb(response) {

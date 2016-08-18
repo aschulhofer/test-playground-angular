@@ -22,6 +22,6 @@
 
   angular.module('app')
     .constant('config', config)
-    .constant('authConfig', config.auth)
+    .constant('AUTHENTICATION_CONFIG', config.auth)
     .constant('AUTHENTICATION_EVENTS', config.events.authentication);
 })();
