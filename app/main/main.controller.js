@@ -5,9 +5,9 @@
     .module('app.main')
     .controller('MainController', MainController);
 
-  MainController.$inject = ['$scope'];
+  MainController.$inject = ['$scope', 'AUTHENTICATION_EVENTS'];
 
-  function MainController($scope) {
+  function MainController($scope, AUTHENTICATION_EVENTS) {
     var vm = this;
 
     vm.testMain = 'NOTHING HERE YET';
@@ -16,8 +16,12 @@
 
     function activate() {
 
-      $scope.$on('LoginEvent', function() {
+      $scope.$on(AUTHENTICATION_EVENTS.loginSuccess, function() {
         vm.testMain = 'LOGGED IN';
+      });
+
+      $scope.$on(AUTHENTICATION_EVENTS.loginFailed, function() {
+        vm.testMain = 'LOGGED FAILED';
       });
 
       console.log('MainController ready.');

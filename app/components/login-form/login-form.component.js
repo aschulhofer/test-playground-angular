@@ -8,9 +8,9 @@
     controllerAs: 'lfcvm'
   });
 
-  LoginFormController.$inject = ['$scope', 'authenticationservice'];
+  LoginFormController.$inject = ['$scope', 'authenticationservice', 'AUTHENTICATION_EVENTS'];
 
-  function LoginFormController($scope, authenticationservice) {
+  function LoginFormController($scope, authenticationservice, AUTHENTICATION_EVENTS) {
     var lfcvm = this;
 
     lfcvm.title = 'Login';
@@ -30,12 +30,12 @@
       .then(function(value) {
         console.log('Login successful: ', value);
 
-        $scope.$emit('LoginEvent', {success: true});
+        $scope.$emit(AUTHENTICATION_EVENTS.loginSuccess, {success: true});
       })
       .catch(function(reason) {
         console.error('Login failed: ', reason);
 
-        $scope.$emit('LoginEvent', {success: false, reason: reason});
+        $scope.$emit(AUTHENTICATION_EVENTS.loginFailed, {success: false, reason: reason});
       });
     }
 
