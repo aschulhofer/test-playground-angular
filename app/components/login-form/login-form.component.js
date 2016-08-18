@@ -5,28 +5,29 @@
   component('loginForm', {
     templateUrl: 'components/login-form/login-form.template.html',
     controller: LoginFormController,
-    controllerAs: 'lfcvm'
+    controllerAs: 'vm'
   });
 
   LoginFormController.$inject = ['$scope', 'authenticationservice', 'AUTHENTICATION_EVENTS'];
 
   function LoginFormController($scope, authenticationservice, AUTHENTICATION_EVENTS) {
-    var lfcvm = this;
+    var vm = this;
 
-    lfcvm.title = 'Login';
+    vm.title = 'Login';
 
-    lfcvm.username = '';
-    lfcvm.password = '';
+    vm.credentials = {
+      username: '',
+      password: ''
+    };
 
-    lfcvm.onLoginClick = onLoginClick;
-
-    lfcvm.onTestClick  = onTestClick;
+    vm.onLoginClick = onLoginClick;
+    vm.onTestClick  = onTestClick;
 
     function onLoginClick() {
-      console.log("LOGIN CLICKED", lfcvm.username, lfcvm.password);
+      console.log("LOGIN CLICKED", vm.credentials);
 
       authenticationservice
-      .login(lfcvm.username, lfcvm.password)
+      .login(vm.credentials.username, vm.credentials.password)
       .then(function(value) {
         console.log('Login successful: ', value);
 
@@ -40,7 +41,7 @@
     }
 
     function onTestClick() {
-      console.log("TEST CLICKED", lfcvm.username, lfcvm.password);
+      console.log("TEST CLICKED", vm.credentials);
 
       authenticationservice
       .doTest()
