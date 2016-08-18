@@ -4,9 +4,9 @@
   angular.module('app.authentication').
   factory('authenticationservice', authenticationserviceFactory);
 
-  authenticationserviceFactory.$inject = ['$q', '$http', 'AUTHENTICATION_CONFIG'];
+  authenticationserviceFactory.$inject = ['$q', '$http', 'UserSessionService', 'AUTHENTICATION_CONFIG'];
 
-  function authenticationserviceFactory($q, $http, AUTHENTICATION_CONFIG) {
+  function authenticationserviceFactory($q, $http, UserSessionService, AUTHENTICATION_CONFIG) {
     return {
       login: login,
       logout: logout,
@@ -34,7 +34,7 @@
 
         var data = response.data;
 
-        localStorage.setItem("id_token", data.jwt);
+        UserSessionService.create(data.jwt, data.username, data.roles);
 
         return true;
       })
@@ -47,6 +47,8 @@
 
     function logout() {
       console.log('logout::not yet implemented');
+
+      UserSessionService.destroy();
     }
 
     function doTest() {
