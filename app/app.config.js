@@ -3,7 +3,7 @@
 
   angular.module('app').
   config(['$locationProvider', '$routeProvider', routeConfig]).
-  config(['$httpProvider', 'jwtInterceptorProvider', jwtConfig]);
+  config(['$httpProvider', 'jwtInterceptorProvider', 'UserSessionServiceProvider', jwtConfig]);
 
   function routeConfig($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
@@ -23,9 +23,9 @@
     $routeProvider.otherwise({redirectTo: '/login'});
   }
 
-  function jwtConfig($httpProvider, jwtInterceptorProvider) {
+  function jwtConfig($httpProvider, jwtInterceptorProvider, UserSessionServiceProvider) {
     jwtInterceptorProvider.tokenGetter = function() {
-      return localStorage.getItem('id_token');
+      return UserSessionServiceProvider.getToken();
     };
 
     $httpProvider.interceptors.push('jwtInterceptor');
