@@ -3,6 +3,11 @@
 
   var config = {
 
+    roles: {
+      admin: 'admin',
+      user: 'user'
+    },
+
     events: {
       authentication: {
         loginSuccess: 'ws.auth.login.success',
@@ -23,5 +28,6 @@
   angular.module('app')
     .constant('config', config)
     .constant('AUTHENTICATION_CONFIG', config.auth)
-    .constant('AUTHENTICATION_EVENTS', config.events.authentication);
+    .constant('AUTHENTICATION_EVENTS', config.events.authentication)
+    .constant('USER_ROLES', config.roles);
 })();
